@@ -1,4 +1,4 @@
-import { element, formatStylesheet } from "./deps.ts";
+import { element, formatStylesheet, scope } from "./deps.ts";
 import { execFunc, statements } from "./deps.ts";
 import { defineCanvasClickHandler } from "./canvas/click-handler.ts";
 import { defineCanvasRenderLoop } from "./canvas/render-loop.ts";
@@ -48,9 +48,7 @@ export function getGameHtmlSrc(): string {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      height: "100%",
-      width: "max-content",
-      margin: "32 auto",
+      // padding: 8,
     },
   });
 
@@ -69,9 +67,8 @@ function getScript() {
     defineUserPage(),
     defineGamePage(),
     defineCanvasClickHandler(),
-    defineCanvasRenderLoop(),
     // execFunc(v.goToHomePage),
     execFunc(v.goToGamePage),
-    execFunc(v.canvasRenderLoop, 0),
+    execFunc(scope("(", defineCanvasRenderLoop())),
   );
 }

@@ -8,7 +8,7 @@ export function defineCanvasClickHandler() {
       // TODO: handle inputs
       execFunc(
         "console.log",
-        `"x:",${prop(v.event, "clientX")},"; y:",${prop(v.event, "clientY")}`,
+        `"x:",${prop(v.event, "clientX")},", y:",${prop(v.event, "clientY")}`,
       ),
     ),
   });

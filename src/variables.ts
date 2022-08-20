@@ -16,6 +16,7 @@ export const globalVariables = {
   // Computed Values
   canvasWidth: "w",
   canvasHeight: "h",
+  isPortraitOrientation: "p",
   // Re-assignable Variables
   event: "e",
   time: "e",
