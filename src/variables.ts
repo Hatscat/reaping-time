@@ -17,9 +17,9 @@ export const globalVariables = {
   canvasWidth: "w",
   canvasHeight: "h",
   isPortraitOrientation: "p",
+  isEditor: "d",
   // Re-assignable Variables
   event: "e",
-  time: "e",
   index1: "i",
   index2: "j",
   index3: "k",

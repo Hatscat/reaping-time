@@ -1,4 +1,4 @@
-import { element, formatStylesheet, scope } from "./deps.ts";
+import { element, formatStylesheet, scope, TRUE } from "./deps.ts";
 import { execFunc, statements } from "./deps.ts";
 import { defineCanvasClickHandler } from "./canvas/click-handler.ts";
 import { defineCanvasRenderLoop } from "./canvas/render-loop.ts";
@@ -68,7 +68,7 @@ function getScript() {
     defineGamePage(),
     defineCanvasClickHandler(),
     // execFunc(v.goToHomePage),
-    execFunc(v.goToGamePage),
+    execFunc(v.goToGamePage, TRUE),
     execFunc(scope("(", defineCanvasRenderLoop())),
   );
 }

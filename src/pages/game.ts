@@ -10,11 +10,13 @@ import { assign, defineFunc, execFunc, prop, statements } from "../deps.ts";
 import { globalVariables as v } from "../variables.ts";
 
 export function defineGamePage() {
+  const isEditorArg = "e";
   return defineFunc(
     v.goToGamePage,
     {
-      args: [], // TODO: distinct editor from game level there
+      args: [isEditorArg],
       body: statements(
+        assign(v.isEditor, isEditorArg),
         setInnerHtml(v.pageElement, [
           element("canvas", {
             tagProps: {
@@ -23,7 +25,10 @@ export function defineGamePage() {
             },
           }),
         ]),
-        assign(prop(v.headerTitle, "innerText"), "'Level x or Editor'"),
+        assign(
+          prop(v.headerTitle, "innerText"),
+          ifElse(v.isEditor, "'Editor'", "'level X'"),
+        ),
         canvasSetup(),
       ),
     },
