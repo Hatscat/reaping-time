@@ -1,4 +1,4 @@
-import { element, setInnerHtml, TRUE } from "../deps.ts";
+import { element, setInnerHtml, stringify, TRUE } from "../deps.ts";
 import { assign, defineFunc, execFunc, prop, statements } from "../deps.ts";
 import { globalVariables as v, htmlTagNames as t } from "../variables.ts";
 
@@ -26,7 +26,7 @@ export function defineHomePage() {
             }),
           ],
         ),
-        assign(prop(v.headerTitle, "innerText"), "''"),
+        assign(prop(v.headerTitle, "innerText"), stringify("")),
       ),
     },
   );
