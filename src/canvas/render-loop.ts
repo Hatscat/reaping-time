@@ -18,9 +18,11 @@ import {
   mod,
   mul,
   not,
+  or,
   prop,
   scope,
   statements,
+  sub,
   Text,
 } from "../deps.ts";
 import { globalVariables as v } from "../variables.ts";
@@ -106,16 +108,16 @@ function drawPalette(): string {
         ),
         assign(
           prop(v.canvasContext, "fillStyle"),
-          dynamicProp(
-            List(
-              Text("#117"),
-              Text("#171"),
-              Text("#711"),
-              Text("#000"),
-              Text("#000"),
-              Text("#111"),
+          or(
+            dynamicProp(
+              List(
+                Text("#117"),
+                Text("#171"),
+                Text("#711"),
+              ),
+              v.index1,
             ),
-            v.index1,
+            Text("#111"),
           ),
         ),
       ],
@@ -126,13 +128,18 @@ function drawPalette(): string {
           config.paletteCellWidth,
           config.paletteCellWidth,
         ]),
+        // assign(prop(v.canvasContext, "fillStyle"), Text("#fff")),
         ifElse(
           isGreater(v.index1, 2),
           execFunc(prop(v.canvasContext, "fillText"), [
-            ifElse(
-              isLower(v.index1, 4),
-              Text("💀"),
-              ifElse(isLower(v.index1, 5), Text("🧍"), Text("❌")),
+            dynamicProp(
+              // Text("ABC"),
+              List(
+                Text("💀"),
+                Text("🧍"),
+                Text("❌"),
+              ),
+              sub(v.index1, 3),
             ),
             add(v.x, roundHalf(config.paletteCellWidth)),
             position[1] + roundHalf(config.paletteCellWidth),
