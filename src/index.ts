@@ -8,6 +8,7 @@ import { defineHomePage } from "./pages/home.ts";
 import { globalVariables as v, htmlTagNames as t } from "./variables.ts";
 import { defineLevelsPage } from "./pages/levels.ts";
 import { defineUserPage } from "./pages/user.ts";
+import { defineCanvasPointerMoveHandler } from "./canvas/pointer-move-handler.ts";
 
 export function getGameHtmlSrc(): string {
   const headerHeight = 48;
@@ -67,6 +68,7 @@ function getScript() {
     defineUserPage(),
     defineGamePage(),
     defineCanvasClickHandler(),
+    defineCanvasPointerMoveHandler(),
     // execFunc(v.goToHomePage),
     execFunc(v.goToGamePage, TRUE),
     execFunc(scope("(", defineCanvasRenderLoop())),

@@ -23,6 +23,7 @@ export function defineGamePage() {
             tagProps: {
               id: v.canvasElement,
               onclick: execFunc(v.canvasClickHandler, "event"),
+              onpointermove: execFunc(v.canvasPointerMoveHandler, "event"),
             },
           }),
         ]),

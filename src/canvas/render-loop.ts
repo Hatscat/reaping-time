@@ -12,7 +12,6 @@ import {
   ifElse,
   ifThen,
   isGreater,
-  isLower,
   List,
   loop,
   mod,
@@ -128,12 +127,10 @@ function drawPalette(): string {
           config.paletteCellWidth,
           config.paletteCellWidth,
         ]),
-        // assign(prop(v.canvasContext, "fillStyle"), Text("#fff")),
         ifElse(
           isGreater(v.index1, 2),
           execFunc(prop(v.canvasContext, "fillText"), [
             dynamicProp(
-              // Text("ABC"),
               List(
                 Text("💀"),
                 Text("🧍"),

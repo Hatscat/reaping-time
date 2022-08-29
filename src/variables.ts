@@ -11,6 +11,7 @@ export const globalVariables = {
   goToGamePage: "G",
   // Event Handlers
   canvasClickHandler: "c",
+  canvasPointerMoveHandler: "m",
   // Factorized Functions
   canvasRenderLoop: "r",
   // Computed Values
@@ -18,15 +19,16 @@ export const globalVariables = {
   canvasHeight: "h",
   isPortraitOrientation: "p",
   isEditor: "d",
+  pointerX: "u",
+  pointerY: "v",
   // Re-assignable Variables
-  event: "e",
+  event: "_",
   index1: "i",
   index2: "j",
   index3: "k",
   x: "x",
   y: "y",
   function: "$",
-  variable: "_",
 } as const;
 
 export const htmlTagNames = {
