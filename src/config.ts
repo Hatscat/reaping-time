@@ -3,6 +3,7 @@ export const config = {
   colCount: 12,
   cellWidth: 48,
   paletteCellWidth: 48,
-  paletteOffset: 16,
+  paletteOffset: 32,
+  paletteMargin: 32 * 5,
   canvasMaxWidth: "1e3",
 };

@@ -11,8 +11,8 @@ import {
   execFunc,
   ifElse,
   ifThen,
-  isDifferent,
   isGreater,
+  isLower,
   loop,
   mod,
   mul,
@@ -81,19 +81,25 @@ function drawGrid(): string {
 
 function drawPalette(): string {
   const gridWidth = config.colCount * config.cellWidth;
+  const position = [
+    gridWidth + config.paletteOffset,
+    config.paletteMargin + config.paletteOffset,
+  ];
+  const roundHalf = (n: number) => n + 0.5 >> 1;
+
   return statements(
     assign(
       prop(v.canvasContext, "font"),
-      `'${config.paletteCellWidth >> 1}px A'`,
+      `'${roundHalf(config.paletteCellWidth)}px A'`,
     ),
     loop({
-      init: assign(v.index1, 5),
+      init: assign(v.index1, 6),
       condition: decrement(v.index1),
       body: [
         assign(
           v.x,
           add(
-            gridWidth + config.paletteOffset,
+            position[0],
             mul(v.index1, config.paletteCellWidth),
           ),
         ),
@@ -106,6 +112,7 @@ function drawPalette(): string {
               stringify("#711"),
               stringify("#000"),
               stringify("#000"),
+              stringify("#111"),
             ]),
             v.index1,
           ),
@@ -114,22 +121,26 @@ function drawPalette(): string {
       body2: [
         execFunc(prop(v.canvasContext, "fillRect"), [
           v.x,
-          config.paletteOffset,
+          position[1],
           config.paletteCellWidth,
           config.paletteCellWidth,
         ]),
         ifElse(
           isGreater(v.index1, 2),
           execFunc(prop(v.canvasContext, "fillText"), [
-            ifElse(isDifferent(v.index1, 3), stringify("💀"), stringify("🧍")),
-            add(v.x, config.paletteCellWidth / 2),
-            config.paletteOffset + config.paletteCellWidth / 2,
+            ifElse(
+              isLower(v.index1, 4),
+              stringify("💀"),
+              ifElse(isLower(v.index1, 5), stringify("🧍"), stringify("❌")),
+            ),
+            add(v.x, roundHalf(config.paletteCellWidth)),
+            position[1] + roundHalf(config.paletteCellWidth),
           ]),
           0,
         ),
         execFunc(prop(v.canvasContext, "strokeRect"), [
           v.x,
-          config.paletteOffset,
+          position[1],
           config.paletteCellWidth,
           config.paletteCellWidth,
         ]),
