@@ -13,6 +13,7 @@ import {
   ifThen,
   isGreater,
   isLower,
+  List,
   loop,
   mod,
   mul,
@@ -20,7 +21,7 @@ import {
   prop,
   scope,
   statements,
-  stringify,
+  Text,
 } from "../deps.ts";
 import { globalVariables as v } from "../variables.ts";
 
@@ -38,7 +39,7 @@ export function defineCanvasRenderLoop() {
         scope(
           "{",
           statements(
-            assign(prop(v.canvasContext, "strokeStyle"), stringify("#fff")),
+            assign(prop(v.canvasContext, "strokeStyle"), Text("#fff")),
             drawGrid(),
             drawPalette(),
           ),
@@ -50,7 +51,7 @@ export function defineCanvasRenderLoop() {
 
 function drawBackground(): string {
   return statements(
-    assign(prop(v.canvasContext, "fillStyle"), stringify("#111")),
+    assign(prop(v.canvasContext, "fillStyle"), Text("#111")),
     execFunc(prop(v.canvasContext, "fillRect"), [
       0,
       0,
@@ -106,14 +107,14 @@ function drawPalette(): string {
         assign(
           prop(v.canvasContext, "fillStyle"),
           dynamicProp(
-            scope("[", [
-              stringify("#117"),
-              stringify("#171"),
-              stringify("#711"),
-              stringify("#000"),
-              stringify("#000"),
-              stringify("#111"),
-            ]),
+            List(
+              Text("#117"),
+              Text("#171"),
+              Text("#711"),
+              Text("#000"),
+              Text("#000"),
+              Text("#111"),
+            ),
             v.index1,
           ),
         ),
@@ -130,8 +131,8 @@ function drawPalette(): string {
           execFunc(prop(v.canvasContext, "fillText"), [
             ifElse(
               isLower(v.index1, 4),
-              stringify("💀"),
-              ifElse(isLower(v.index1, 5), stringify("🧍"), stringify("❌")),
+              Text("💀"),
+              ifElse(isLower(v.index1, 5), Text("🧍"), Text("❌")),
             ),
             add(v.x, roundHalf(config.paletteCellWidth)),
             position[1] + roundHalf(config.paletteCellWidth),

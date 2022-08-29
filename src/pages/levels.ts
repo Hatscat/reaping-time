@@ -1,4 +1,4 @@
-import { element, setInnerHtml, stringify } from "../deps.ts";
+import { element, setInnerHtml, Text } from "../deps.ts";
 import { assign, defineFunc, execFunc, prop, statements } from "../deps.ts";
 import { globalVariables as v, htmlTagNames as t } from "../variables.ts";
 
@@ -14,7 +14,7 @@ export function defineLevelsPage() {
             children: "Level x",
           }),
         ]),
-        assign(prop(v.headerTitle, "innerText"), stringify("Levels")),
+        assign(prop(v.headerTitle, "innerText"), Text("Levels")),
       ),
     },
   );

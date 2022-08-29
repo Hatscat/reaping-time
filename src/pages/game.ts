@@ -5,7 +5,7 @@ import {
   ifElse,
   isLower,
   setInnerHtml,
-  stringify,
+  Text,
 } from "../deps.ts";
 import { assign, defineFunc, execFunc, prop, statements } from "../deps.ts";
 import { globalVariables as v } from "../variables.ts";
@@ -28,7 +28,7 @@ export function defineGamePage() {
         ]),
         assign(
           prop(v.headerTitle, "innerText"),
-          ifElse(v.isEditor, stringify("Editor"), stringify("level X")),
+          ifElse(v.isEditor, Text("Editor"), Text("level X")),
         ),
         canvasSetup(),
       ),
@@ -64,7 +64,7 @@ function canvasSetup() {
       v.canvasContext,
       execFunc(prop(v.canvasElement, "getContext"), "2d", true),
     ),
-    assign(prop(v.canvasContext, "textAlign"), stringify("center")),
-    assign(prop(v.canvasContext, "textBaseline"), stringify("middle")),
+    assign(prop(v.canvasContext, "textAlign"), Text("center")),
+    assign(prop(v.canvasContext, "textBaseline"), Text("middle")),
   );
 }

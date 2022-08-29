@@ -1,4 +1,4 @@
-import { element, setInnerHtml, stringify } from "../deps.ts";
+import { element, setInnerHtml, Text } from "../deps.ts";
 import { assign, defineFunc, prop, statements } from "../deps.ts";
 import { globalVariables as v, htmlTagNames as t } from "../variables.ts";
 
@@ -17,7 +17,7 @@ export function defineUserPage() {
             closed: true,
           }),
         ]),
-        assign(prop(v.headerTitle, "innerText"), stringify("Pseudo")),
+        assign(prop(v.headerTitle, "innerText"), Text("Pseudo")),
       ),
     },
   );
