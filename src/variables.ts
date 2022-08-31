@@ -21,7 +21,8 @@ export const globalVariables = {
   editorState: "s",
   pointerX: "u",
   pointerY: "v",
-  hoveredCell: "o",
+  hoveredLandscapeCanvasCell: "o",
+  hoveredGridCell: "g",
   pickedItem: "t",
   // Re-assignable Variables
   arg: "_",

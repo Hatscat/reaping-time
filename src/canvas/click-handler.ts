@@ -7,7 +7,7 @@ export function defineCanvasClickHandler() {
       // TODO: handle inputs
       execFunc(
         "console.log",
-        `"x:",${v.pointerX},", y:",${v.pointerY},", cell:",${v.hoveredCell}`,
+        `"x:",${v.pointerX},", y:",${v.pointerY},", canvasCell:",${v.hoveredLandscapeCanvasCell},", gridCell:",${v.hoveredGridCell}`,
       ),
     ),
   });

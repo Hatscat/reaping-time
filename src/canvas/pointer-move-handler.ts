@@ -6,24 +6,23 @@ import {
   defineFunc,
   div,
   execFunc,
-  mod,
   mul,
   prop,
   scope,
   statements,
-  Text,
 } from "../deps.ts";
 import { globalVariables as v } from "../variables.ts";
 
 export function defineCanvasPointerMoveHandler() {
+  const innerFunctionArg = v.index1;
   return defineFunc(v.canvasPointerMoveHandler, {
     args: [v.arg],
     body: statements(
       assign(v.pointerX, prop(v.arg, "offsetX")),
       assign(v.pointerY, prop(v.arg, "offsetY")),
-      assign(
-        v.hoveredCell,
-        castInt(
+      defineFunc(v.function, {
+        args: [innerFunctionArg],
+        body: castInt(
           add(
             div(v.pointerX, config.cellWidth),
             mul(
@@ -31,10 +30,19 @@ export function defineCanvasPointerMoveHandler() {
                 "(",
                 castInt(div(v.pointerY, config.cellWidth)),
               ),
-              config.gridSideCellCount,
+              innerFunctionArg,
             ),
           ),
         ),
+        safe: false,
+      }),
+      assign(
+        v.hoveredLandscapeCanvasCell,
+        execFunc(v.function, config.canvasLengthCellCount),
+      ),
+      assign(
+        v.hoveredGridCell,
+        execFunc(v.function, config.gridSideCellCount),
       ),
     ),
   });
