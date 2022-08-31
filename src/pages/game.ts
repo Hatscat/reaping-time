@@ -11,13 +11,13 @@ import { assign, defineFunc, execFunc, prop, statements } from "../deps.ts";
 import { globalVariables as v } from "../variables.ts";
 
 export function defineGamePage() {
-  const isEditorArg = "e";
+  const editorState = v.arg;
   return defineFunc(
     v.goToGamePage,
     {
-      args: [isEditorArg],
+      args: [editorState],
       body: statements(
-        assign(v.isEditor, isEditorArg),
+        assign(v.editorState, editorState),
         setInnerHtml(v.pageElement, [
           element("canvas", {
             tagProps: {
@@ -29,7 +29,7 @@ export function defineGamePage() {
         ]),
         assign(
           prop(v.headerTitle, "innerText"),
-          ifElse(v.isEditor, Text("Editor"), Text("level X")),
+          ifElse(v.editorState, Text("Editor"), Text("level X")),
         ),
         canvasSetup(),
       ),
@@ -38,18 +38,20 @@ export function defineGamePage() {
 }
 
 function canvasSetup() {
+  const maxWidth = config.canvasLengthCellCount * config.cellWidth;
+
   return expressions(
     assign(
       v.isPortraitOrientation,
-      isLower("innerWidth", config.canvasMaxWidth),
+      isLower("innerWidth", maxWidth),
     ),
     assign(
       v.canvasWidth,
       prop(v.canvasElement, "width"),
       ifElse(
         v.isPortraitOrientation,
-        config.colCount * config.cellWidth,
-        config.canvasMaxWidth,
+        config.gridSideCellCount * config.cellWidth,
+        maxWidth,
       ),
     ),
     assign(
@@ -57,8 +59,8 @@ function canvasSetup() {
       prop(v.canvasElement, "height"),
       ifElse(
         v.isPortraitOrientation,
-        config.canvasMaxWidth,
-        config.rowCount * config.cellWidth,
+        maxWidth,
+        config.gridSideCellCount * config.cellWidth,
       ),
     ),
     assign(

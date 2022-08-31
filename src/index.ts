@@ -1,11 +1,15 @@
-import { element, formatStylesheet, scope, TRUE } from "./deps.ts";
+import { element, formatStylesheet, scope } from "./deps.ts";
 import { execFunc, statements } from "./deps.ts";
 import { defineCanvasClickHandler } from "./canvas/click-handler.ts";
 import { defineCanvasRenderLoop } from "./canvas/render-loop.ts";
 import { headerElement } from "./elements/header.ts";
 import { defineGamePage } from "./pages/game.ts";
 import { defineHomePage } from "./pages/home.ts";
-import { globalVariables as v, htmlTagNames as t } from "./variables.ts";
+import {
+  EditorState,
+  globalVariables as v,
+  htmlTagNames as t,
+} from "./variables.ts";
 import { defineLevelsPage } from "./pages/levels.ts";
 import { defineUserPage } from "./pages/user.ts";
 import { defineCanvasPointerMoveHandler } from "./canvas/pointer-move-handler.ts";
@@ -70,7 +74,7 @@ function getScript() {
     defineCanvasClickHandler(),
     defineCanvasPointerMoveHandler(),
     // execFunc(v.goToHomePage),
-    execFunc(v.goToGamePage, TRUE),
+    execFunc(v.goToGamePage, EditorState.Edition),
     execFunc(scope("(", defineCanvasRenderLoop())),
   );
 }

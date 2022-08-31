@@ -27,7 +27,7 @@ import {
 import { globalVariables as v } from "../variables.ts";
 
 export function defineCanvasRenderLoop() {
-  const timeArg = "e";
+  const timeArg = v.arg;
 
   return defineFunc(v.canvasRenderLoop, {
     args: [timeArg],
@@ -36,7 +36,7 @@ export function defineCanvasRenderLoop() {
       abortIf(not(prop("window", v.canvasContext))),
       drawBackground(),
       ifThen(
-        v.isEditor,
+        v.editorState,
         scope(
           "{",
           statements(
@@ -63,16 +63,16 @@ function drawBackground(): string {
 }
 
 function drawGrid(): string {
-  const cellCount = config.rowCount * config.colCount;
+  const cellsCount = config.gridSideCellCount ** 2;
   return loop({
     init: [
-      assign(v.index1, cellCount),
+      assign(v.index1, cellsCount),
     ],
     condition: decrement(v.index1),
     body: execFunc(prop(v.canvasContext, "strokeRect"), [
-      mul(mod(v.index1, config.colCount), config.cellWidth),
+      mul(mod(v.index1, config.gridSideCellCount), config.cellWidth),
       mul(
-        scope("(", castInt(div(v.index1, config.colCount))),
+        scope("(", castInt(div(v.index1, config.gridSideCellCount))),
         config.cellWidth,
       ),
       config.cellWidth,
@@ -82,17 +82,16 @@ function drawGrid(): string {
 }
 
 function drawPalette(): string {
-  const gridWidth = config.colCount * config.cellWidth;
   const position = [
-    gridWidth + config.paletteOffset,
-    config.paletteMargin + config.paletteOffset,
+    (config.gridSideCellCount + 1) * config.cellWidth,
+    1 * config.cellWidth,
   ];
   const roundHalf = (n: number) => n + 0.5 >> 1;
 
   return statements(
     assign(
       prop(v.canvasContext, "font"),
-      `'${roundHalf(config.paletteCellWidth)}px A'`,
+      `'${roundHalf(config.cellWidth)}px A'`,
     ),
     loop({
       init: assign(v.index1, 6),
@@ -102,7 +101,7 @@ function drawPalette(): string {
           v.x,
           add(
             position[0],
-            mul(v.index1, config.paletteCellWidth),
+            mul(v.index1, config.cellWidth),
           ),
         ),
         assign(
@@ -124,8 +123,8 @@ function drawPalette(): string {
         execFunc(prop(v.canvasContext, "fillRect"), [
           v.x,
           position[1],
-          config.paletteCellWidth,
-          config.paletteCellWidth,
+          config.cellWidth,
+          config.cellWidth,
         ]),
         ifElse(
           isGreater(v.index1, 2),
@@ -138,16 +137,16 @@ function drawPalette(): string {
               ),
               sub(v.index1, 3),
             ),
-            add(v.x, roundHalf(config.paletteCellWidth)),
-            position[1] + roundHalf(config.paletteCellWidth),
+            add(v.x, roundHalf(config.cellWidth)),
+            position[1] + roundHalf(config.cellWidth),
           ]),
           0,
         ),
         execFunc(prop(v.canvasContext, "strokeRect"), [
           v.x,
           position[1],
-          config.paletteCellWidth,
-          config.paletteCellWidth,
+          config.cellWidth,
+          config.cellWidth,
         ]),
       ],
     }),

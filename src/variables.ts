@@ -18,11 +18,13 @@ export const globalVariables = {
   canvasWidth: "w",
   canvasHeight: "h",
   isPortraitOrientation: "p",
-  isEditor: "d",
+  editorState: "s",
   pointerX: "u",
   pointerY: "v",
+  hoveredCell: "o",
+  pickedItem: "t",
   // Re-assignable Variables
-  event: "_",
+  arg: "_",
   index1: "i",
   index2: "j",
   index3: "k",
@@ -39,3 +41,9 @@ export const htmlTagNames = {
   interactive: "v",
   bigTitle: "t",
 } as const;
+
+export const enum EditorState {
+  None = 0,
+  Edition = 1,
+  Validation = 2,
+}

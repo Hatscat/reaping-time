@@ -1,6 +1,10 @@
 import { element, setInnerHtml, Text, TRUE } from "../deps.ts";
 import { assign, defineFunc, execFunc, prop, statements } from "../deps.ts";
-import { globalVariables as v, htmlTagNames as t } from "../variables.ts";
+import {
+  EditorState,
+  globalVariables as v,
+  htmlTagNames as t,
+} from "../variables.ts";
 
 export function defineHomePage() {
   return defineFunc(
@@ -20,7 +24,9 @@ export function defineHomePage() {
               children: "Play",
             }),
             element(t.button, {
-              tagProps: { onclick: execFunc(v.goToGamePage, TRUE) },
+              tagProps: {
+                onclick: execFunc(v.goToGamePage, EditorState.Edition),
+              },
               closed: true,
               children: "Editor",
             }),
