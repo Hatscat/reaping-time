@@ -3,3 +3,7 @@ export const config = {
   gridSideCellCount: 12,
   canvasLengthCellCount: 20,
 };
+
+export const featureFlags = {
+  userPage: false,
+};

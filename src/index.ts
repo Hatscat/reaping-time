@@ -13,6 +13,7 @@ import {
 import { defineLevelsPage } from "./pages/levels.ts";
 import { defineUserPage } from "./pages/user.ts";
 import { defineCanvasPointerMoveHandler } from "./canvas/pointer-move-handler.ts";
+import { featureFlags } from "./config.ts";
 
 export function getGameHtmlSrc(): string {
   const headerHeight = 48;
@@ -69,7 +70,7 @@ function getScript() {
   return statements(
     defineHomePage(),
     defineLevelsPage(),
-    defineUserPage(),
+    featureFlags.userPage && defineUserPage(),
     defineGamePage(),
     defineCanvasClickHandler(),
     defineCanvasPointerMoveHandler(),
