@@ -1,4 +1,4 @@
-import { element, setInnerHtml, Text, TRUE } from "../deps.ts";
+import { element, setInnerHtml, Text } from "../deps.ts";
 import { assign, defineFunc, execFunc, prop, statements } from "../deps.ts";
 import {
   EditorState,

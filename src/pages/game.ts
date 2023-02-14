@@ -65,7 +65,9 @@ function canvasSetup() {
     ),
     assign(
       v.canvasContext,
-      execFunc(prop(v.canvasElement, "getContext"), "2d", true),
+      execFunc(prop(v.canvasElement, "getContext"), "2d", {
+        isTemplateLiteral: true,
+      }),
     ),
     assign(prop(v.canvasContext, "textAlign"), Text("center")),
     assign(prop(v.canvasContext, "textBaseline"), Text("middle")),

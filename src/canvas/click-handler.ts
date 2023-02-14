@@ -1,4 +1,4 @@
-import { defineFunc, execFunc, prop, statements } from "../deps.ts";
+import { defineFunc, execFunc, statements } from "../deps.ts";
 import { globalVariables as v } from "../variables.ts";
 
 export function defineCanvasClickHandler() {
