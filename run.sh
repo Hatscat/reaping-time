@@ -3,11 +3,11 @@
 case "$1" in
 
   "build")
-    deno run --allow-write main.ts
+    deno run --check --allow-write main.ts
     ;;
 
   "dev")
-    deno run --watch --allow-write main.ts
+    deno run --check --watch --allow-write main.ts
     ;;
 
   "reload-deps")
