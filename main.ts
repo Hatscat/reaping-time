@@ -1,6 +1,7 @@
+import { replaceAllTmpVarNames } from "./src/deps.ts";
 import { getGameHtmlSrc } from "./src/index.ts";
 
-const src = getGameHtmlSrc();
+const src = replaceAllTmpVarNames(getGameHtmlSrc());
 
 await Deno.mkdir("dist", { recursive: true });
 

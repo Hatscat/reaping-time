@@ -1,38 +1,40 @@
-export const globalVariables = {
+import { provideTmpVarNames } from "./deps.ts";
+
+export const globalVariables = provideTmpVarNames({
   // Elements
-  pageElement: "P",
-  headerTitle: "T",
-  canvasElement: "C",
-  canvasContext: "X",
+  pageElement: "",
+  headerTitle: "",
+  canvasElement: "",
+  canvasContext: "",
   // Pages
-  goToHomePage: "H",
-  goToLevelsPage: "L",
-  goToUserPage: "U",
-  goToGamePage: "G",
+  goToHomePage: "",
+  goToLevelsPage: "",
+  goToUserPage: "",
+  goToGamePage: "",
   // Event Handlers
-  canvasClickHandler: "c",
-  canvasPointerMoveHandler: "m",
+  canvasClickHandler: "",
+  canvasPointerMoveHandler: "",
   // Factorized Functions
-  canvasRenderLoop: "r",
+  canvasRenderLoop: "",
   // Computed Values
-  canvasWidth: "w",
-  canvasHeight: "h",
-  isPortraitOrientation: "p",
-  editorState: "s",
-  pointerX: "u",
-  pointerY: "v",
-  hoveredLandscapeCanvasCell: "o",
-  hoveredGridCell: "g",
-  pickedItem: "t",
+  canvasWidth: "",
+  canvasHeight: "",
+  isPortraitOrientation: "",
+  editorState: "",
+  pointerX: "",
+  pointerY: "",
+  hoveredLandscapeCanvasCell: "",
+  hoveredGridCell: "",
+  pickedItem: "",
   // Re-assignable Variables
-  arg: "_",
-  index1: "i",
-  index2: "j",
-  index3: "k",
-  x: "x",
-  y: "y",
-  function: "$",
-} as const;
+  arg: "",
+  index1: "",
+  index2: "",
+  index3: "",
+  x: "",
+  y: "",
+  function: "",
+});
 
 export const htmlTagNames = {
   header: "h1",
